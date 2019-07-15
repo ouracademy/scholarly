@@ -12,7 +12,9 @@ def get_title(html):
 
 def get_year(html):
     subtitle = html.find('div', class_='gs_a')
-    return re.search('[0-9]{4}', subtitle.text)[0] if subtitle.text else ''
+    text = subtitle.text if subtitle.text else ''
+    match = re.search('[0-9]{4}',text)
+    return match[0] if match else ''
 
 
 def get_url(html):
