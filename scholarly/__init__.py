@@ -1,3 +1,3 @@
-from scholarly import *
+from scholarly import search_pubs_query
 
 

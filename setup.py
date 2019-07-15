@@ -17,7 +17,6 @@ setuptools.setup(
 
     url = 'https://github.com/OrganicIrradiation/scholarly',
     packages=['scholarly'],
-    download_url = 'https://github.com/OrganicIrradiation/scholarly/tarball/v0.2.5',
     keywords = ['Google Scholar', 'academics', 'citations'],
     classifiers = [
         'Development Status :: 3 - Alpha',
