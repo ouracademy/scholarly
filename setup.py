@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'scholarly',
-    version = '0.2.9',
+    version = '0.3',
     author = 'Steven A. Cholewiak',
     author_email = 'steven@cholewiak.com',
 
@@ -16,7 +16,7 @@ setuptools.setup(
     license='Unlicense',
 
     url = 'https://github.com/OrganicIrradiation/scholarly',
-    packages=['scholarly'],
+    packages=setuptools.find_packages(),
     keywords = ['Google Scholar', 'academics', 'citations'],
     classifiers = [
         'Development Status :: 3 - Alpha',

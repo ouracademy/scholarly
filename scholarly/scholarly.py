@@ -15,7 +15,7 @@ import requests
 import sys
 import time
 
-from extractor import fields_by_publication 
+from scholarly.extractor import fields_by_publication 
 
 _GOOGLEID = hashlib.md5(str(random.random()).encode('utf-8')).hexdigest()[:16]
 _COOKIES = {'GSP': 'ID={0}:CF=4'.format(_GOOGLEID)}
