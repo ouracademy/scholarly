@@ -16,7 +16,7 @@ setuptools.setup(
     license='Unlicense',
 
     url = 'https://github.com/OrganicIrradiation/scholarly',
-    packages=setuptools.find_packages(),
+    packages=['scholarly'],
     download_url = 'https://github.com/OrganicIrradiation/scholarly/tarball/v0.2.5',
     keywords = ['Google Scholar', 'academics', 'citations'],
     classifiers = [
