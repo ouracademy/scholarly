@@ -15,6 +15,8 @@ import requests
 import sys
 import time
 
+from extractor import fields_by_publication 
+
 _GOOGLEID = hashlib.md5(str(random.random()).encode('utf-8')).hexdigest()[:16]
 _COOKIES = {'GSP': 'ID={0}:CF=4'.format(_GOOGLEID)}
 _HEADERS = {
@@ -148,23 +150,9 @@ class Publication(object):
                 self.bib['year'] = int(year.text)
         elif self.source == 'scholar':
             databox = __data.find('div', class_='gs_ri')
-            title = databox.find('h3', class_='gs_rt')
-            if title.find('span', class_='gs_ctu'): # A citation
-                title.span.extract()
-            elif title.find('span', class_='gs_ctc'): # A book or PDF
-                title.span.extract()
-            self.bib['title'] = title.text.strip()
-            subtitle = databox.find('div', class_='gs_a')
-            if subtitle.text:
-                self.bib['year'] = re.search('[0-9]{4}', subtitle.text)[0]
-            if title.find('a'):
-                self.bib['url'] = title.find('a')['href']
-            authorinfo = databox.find('div', class_='gs_a')
-            self.bib['author'] = ' and '.join([i.strip() for i in authorinfo.text.split(' - ')[0].split(',')])
-            if databox.find('div', class_='gs_rs'):
-                self.bib['abstract'] = databox.find('div', class_='gs_rs').text
-                if self.bib['abstract'][0:8].lower() == 'abstract':
-                    self.bib['abstract'] = self.bib['abstract'][9:].strip()
+            for [name, extractor] in fields_by_publication:
+                self.bib[name] = extractor(databox)
+        
             lowerlinks = databox.find('div', class_='gs_fl').find_all('a')
             for link in lowerlinks:
                 if 'Import into BibTeX' in link.text:
