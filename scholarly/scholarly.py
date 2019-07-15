@@ -58,7 +58,6 @@ def _handle_captcha(url):
     # Upload to remote host and display to user for human verification
     img_upload = requests.post('http://postimage.org/',
         files={'upload[]': ('scholarly_captcha.jpg', captcha.text)})
-    print(img_upload.text)
     img_url_soup = BeautifulSoup(img_upload.text, 'html.parser')
     img_url = img_url_soup.find_all(alt='scholarly_captcha')[0].get('src')
     print('CAPTCHA image URL: {0}'.format(img_url))
@@ -155,6 +154,9 @@ class Publication(object):
             elif title.find('span', class_='gs_ctc'): # A book or PDF
                 title.span.extract()
             self.bib['title'] = title.text.strip()
+            subtitle = databox.find('div', class_='gs_a')
+            if subtitle.text:
+                self.bib['year'] = re.search('[0-9]{4}', subtitle.text)[0]
             if title.find('a'):
                 self.bib['url'] = title.find('a')['href']
             authorinfo = databox.find('div', class_='gs_a')
