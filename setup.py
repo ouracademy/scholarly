@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'scholarly',
-    version = '0.2.8',
+    version = '0.2.9',
     author = 'Steven A. Cholewiak',
     author_email = 'steven@cholewiak.com',
 
