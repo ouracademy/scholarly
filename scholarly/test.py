@@ -55,6 +55,10 @@ class TestScholarly(unittest.TestCase):
         self.assertEqual(author.name, u'Steven A. Cholewiak')
         self.assertEqual(author.id, u'4bahYMkAAAAJ')
 
+    def test_get_year_by_publication(self):
+        pub = next(scholarly.search_pubs_query('machine learning'))
+        self.assertTrue( 'year' in pub.bib)
+
 if __name__ == '__main__':
     unittest.main()
 
